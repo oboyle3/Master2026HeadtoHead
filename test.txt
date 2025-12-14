@@ -1,0 +1,22 @@
+
+script to load csv
+
+python manage.py shell
+
+
+import csv
+from Master2026HeadtoHead.models import AllGolfers
+
+with open('all_golfers.csv', newline='', encoding='utf-8') as csvfile:
+    reader = csv.DictReader(csvfile)
+    for row in reader:
+        AllGolfers.objects.create(
+            name=row['name'],
+            hometown=row['hometown'] or '',
+            tour=row['tour'] or '',
+            rating=int(row['rating']),
+            day_1_score_Masters26=None,
+            day_2_score_Masters26=None,
+            day_3_score_Masters26=None,
+            day_4_score_Masters26=None
+        )
